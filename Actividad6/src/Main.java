@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -70,14 +71,21 @@ public class Main {
                 System.out.println("4) Ver información del profesor");
                 System.out.println("5) salir");
 
-                switch( scanner.nextInt() ) {
+                int opcion = 0;
+
+                try {
+                    opcion = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
+
+                scanner.nextLine();
+
+                switch( opcion ) {
                     case 1:
-                        scanner.nextLine();
                         Alumno nuevoAlumno = crearAlumno(scanner);
                         nuevoGrupo.addAlumno(nuevoAlumno);
                         break;
                     case 2:
-                        scanner.nextLine();
                         ArrayList<Alumno> listaAlumnos = nuevoGrupo.getListaAlumnos();
 
                         for( Alumno alumno : listaAlumnos ) {
@@ -85,15 +93,15 @@ public class Main {
                         }
                         break;
                     case 3:
-                        scanner.nextLine();
                         buscarAlumno(scanner, nuevoGrupo);
                         break;
                     case 4:
-                        scanner.nextLine();
                         System.out.println(nuevoGrupo.getProfesorAsignado());
                         break;
                     case 5:
                         bucle = false;
+                        break;
+                    default:
                         break;
                 }
             }
